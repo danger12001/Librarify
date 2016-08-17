@@ -8,7 +8,7 @@ var express = require('express'),
     nodemailer = require('nodemailer');
 
     var app = express();
-    var setup = require('./database/setup');
+    var register = require('./routes/register');
 
     function errorHandler(err, req, res, next) {
       res.status(500);
@@ -63,6 +63,7 @@ app.get('/registration', function(req, res) {
     user: req.session.username
   });
 });
+app.post('/registration', register);
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
     admin: req.session.admintab,

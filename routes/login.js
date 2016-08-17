@@ -30,7 +30,7 @@ module.exports = function(req, res) {
                         bcrypt.hash(pin, 10 , function(err, hash){
                           pin = hash;
                         });
-                        connection.query('INSERT into users (one-time-pin) values = ?', pin, function(err, rows){
+                        connection.query('INSERT into users (one_time_pin) values = ?', pin, function(err, rows){
                         });
                       }
                       else {
