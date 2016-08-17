@@ -1,2 +1,11 @@
-ALTER TABLE `info`
-  ADD CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+-- ALTER TABLE `info`
+--   ADD CONSTRAINT `username_fk` FOREIGN KEY  IF NOT EXISTS (`username`) REFERENCES `users` (`username_fk`);
+--
+
+  -- IF NOT EXISTS (SELECT NULL FROM information_schema.TABLE_CONSTRAINTS WHERE
+  --                    CONSTRAINT_SCHEMA = DATABASE() AND
+  --                    CONSTRAINT_NAME   = 'username_fk' AND
+  --                    CONSTRAINT_TYPE   = 'FOREIGN KEY') THEN
+  --                    ALTER TABLE `info`
+  --                      ADD CONSTRAINT `username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+  -- END IF
