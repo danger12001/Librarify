@@ -13,7 +13,7 @@ var adminInsert = String(fs.readFileSync('./database/sql/admin.sql'));
   var dbOptions = {
     host: '127.0.0.1',
     user: 'root',
-    password: 'INSERT LOCAL PW HERE!',
+    password: 'mxmaolqk',
     port: 3306,
     database: "librarifyDB"
   };
