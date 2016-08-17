@@ -39,7 +39,17 @@ app.engine('handlebars', handlebars({
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
 
-setup.setup();
+// setup.setup();
+
+// Middleware
+app.use(function(req, res, next) {
+  if (req.path != "/login" && req.path != "/signup") {
+      if (!req.session.username) {
+        return res.redirect("/login");
+    }
+  }
+  next();
+});
 // End of setup
 app.get('/', function(req, res) {
   res.render("home", {
