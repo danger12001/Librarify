@@ -1,6 +1,6 @@
 var queryBuilder = require('./queryBuilder');
 
-module.exports=function(connection){
+  this.insertData = function() {
   var QueryService = new queryBuilder(connection);
 
   var data= {
@@ -8,13 +8,13 @@ module.exports=function(connection){
     surname: req.session.surname,
     username: req.session.username,
     address: req.session.address,
-    cell-number: req.session.cell-number,
+    cell_number: req.session.cell_number,
     email: req.session.email,
-    ID-number: req.session.ID-number
+    ID_number: req.session.ID_number
   }
 
-  this.insertData = function(data) {
-    return QueryService.runQuery("INSERT INTO info SET ? ",data);
+
+    return QueryService.runQuery("INSERT INTO info SET ? ",[data]);
   };
 
   };

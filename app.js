@@ -7,8 +7,12 @@ var express = require('express'),
     flash = require('express-flash'),
     nodemailer = require('nodemailer');
 
+
     var app = express();
     var setup = require('./database/setup');
+
+
+    
 
     function errorHandler(err, req, res, next) {
       res.status(500);
