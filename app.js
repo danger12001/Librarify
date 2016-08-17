@@ -7,8 +7,12 @@ var express = require('express'),
     flash = require('express-flash'),
     nodemailer = require('nodemailer');
 
+
     var app = express();
     var register = require('./routes/register');
+
+
+    
 
     function errorHandler(err, req, res, next) {
       res.status(500);
