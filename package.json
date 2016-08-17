@@ -17,6 +17,8 @@
     "mysql": "~2.11.1",
     "express-handlebars": "~3.0.0",
     "nodemailer": "~2.5.0",
-    "bluebird": "~3.4.1"
+    "bluebird": "~3.4.1",
+    "express-flash": "0.0.2",
+    "nodemon": "~1.10.0"
   }
 }
