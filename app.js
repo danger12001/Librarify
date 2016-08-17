@@ -8,6 +8,7 @@ var express = require('express'),
     nodemailer = require('nodemailer');
 
     var app = express();
+    var setup = require('./database/setup');
 
     function errorHandler(err, req, res, next) {
       res.status(500);
@@ -37,12 +38,39 @@ app.engine('handlebars', handlebars({
 }));
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
+
+setup.setup();
 // End of setup
-
-
-
-
-
+app.get('/', function(req, res) {
+  res.render("home", {
+    admin: req.session.admintab,
+    user: req.session.username
+  });
+});
+app.get('/registration', function(req, res) {
+  res.render("registration", {
+    admin: req.session.admintab,
+    user: req.session.username
+  });
+});
+app.get('/editDetails', function(req, res) {
+  res.render("editDetails", {
+    admin: req.session.admintab,
+    user: req.session.username
+  });
+});
+app.get('/login', function(req, res) {
+  res.render("login", {
+  });
+});
+app.get('/signup', function(req, res) {
+  res.render("signup", {
+  });
+});
+app.get('/verify', function(req, res) {
+  res.render("verify", {
+  });
+});
 
 //starting server
 var server = app.listen(3000, function() {
