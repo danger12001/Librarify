@@ -4,28 +4,23 @@ var mysql = require('mysql');
 var fs = require("fs");
 var myConnection = require('express-myconnection');
 
-var createDB = String(fs.readFileSync('./database/sql/createDB.sql'));
-var infoFK = String(fs.readFileSync('./database/sql/infoFK.sql'));
-var infoTable = String(fs.readFileSync('./database/sql/infoTable.sql'));
-var users = String(fs.readFileSync('./database/sql/userTable.sql'));
-var adminInsert = String(fs.readFileSync('./database/sql/admin.sql'));
+var createDB = String(fs.readFileSync('./sql/createDB.sql'));
+var infoFK = String(fs.readFileSync('./sql/infoFK.sql'));
+var infoTable = String(fs.readFileSync('./sql/infoTable.sql'));
+var users = String(fs.readFileSync('./sql/userTable.sql'));
+var adminInsert = String(fs.readFileSync('./sql/admin.sql'));
 
   var dbOptions = {
     host: '127.0.0.1',
     user: 'root',
-<<<<<<< HEAD
-    password: '12345',
-=======
-    password: '5550121a',
-    // password: 'mxmaolqk',
->>>>>>> 948c472ee568ffcaa8d5a2de532c93f50595a0d9
+    // password: '5550121a',
+    password: 'coder123',
     port: 3306,
     database: "librarifyDB"
   };
 var connection = mysql.createConnection(dbOptions);
 
 
-exports.setup = function(){
 
 //DB SETUP SQL
 connection.query(createDB, [], function(err, result) {
@@ -45,4 +40,3 @@ connection.query(createDB, [], function(err, result) {
 });
 });
 });
-};
