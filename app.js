@@ -176,7 +176,7 @@ app.post('/signup', signup);
 app.get("/logout", function(req, res) {
   delete req.session.username;
   delete req.session.admintab;
-  res.redirect("/");
+  res.redirect("/login");
 });
 //starting server
 var server = app.listen(3000, function() {
