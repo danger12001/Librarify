@@ -34,16 +34,16 @@
           {{/unless}}
           {{/if}}
 
-          {{#if admin}}
           {{#unless user}}
+          {{#if admin}}
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout" style="float:right">Logout</a>
           </li>
-          {{/unless}}
           {{/if}}
+          {{/unless}}
         </ul>
       </div>
 
