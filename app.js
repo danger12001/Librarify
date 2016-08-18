@@ -15,13 +15,7 @@ var express = require('express'),
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
     var Pic = require('./routes/pics'),
-<<<<<<< HEAD
-	multer = require('multer'),
-    ConnectionProvider = require('./routes/connectionProvider'),
-=======
-     multer = require('multer'),
-    // ConnectionProvider = require('./routes/connectionProvider'),
->>>>>>> ce3ba95cadf7c3e22cc3c3029dddf15bcbe463ca
+
 PicDataService = require('./data-services/picDataService');
 
 
@@ -153,7 +147,7 @@ app.get('/registration', function(req, res) {
     user: req.session.username
   });
 });
-app.post('/registration',register,multer({ dest: './public/uploads/'}).single('image'), pic.postPic);
+app.post('/registration',register);
 
 
 app.get('/editDetails', function(req, res) {
@@ -182,7 +176,6 @@ app.get('/verify', function(req, res) {
   res.render("verify", {
     admin: req.session.admintab,
     user: req.session.username,
-    img: pic.showPics
   });
 });
 app.post('/verify', verify);
