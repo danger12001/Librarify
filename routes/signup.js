@@ -40,5 +40,7 @@ module.exports = function(req, res, next) {
 
             });
       });
+>>>>>>> 20c54194293d3433277c7ec6e8cd2ed6f0b6eff2
     });
+});
 };

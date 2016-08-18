@@ -45,7 +45,7 @@ PicDataService = require('./data-services/picDataService');
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
-      password: 'password1!',
+      password: '12345',
       port: 3306,
       database: "librarifyDB"
     };
