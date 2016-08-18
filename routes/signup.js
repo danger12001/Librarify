@@ -16,6 +16,7 @@ module.exports = function(req, res, next) {
             username: req.body.username,
             admin: admin,
             locked: locked,
+            registered: 0
         };
 
         if(data.username.length < 4 || password.length < 4){
