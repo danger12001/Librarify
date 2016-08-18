@@ -161,11 +161,14 @@ login(req,res);
 
 app.get('/verify', function(req, res) {
   res.render("verify", {
+    admin: req.session.admintab,
+    user: req.session.username
   });
 });
 app.post('/verify', verify);
 app.get('/signup', function(req, res){
-  res.render('signup');
+  res.render('signup', {  admin: req.session.admintab,
+    user: req.session.username});
 });
 app.post('/signup', signup);
 
