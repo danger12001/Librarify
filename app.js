@@ -8,21 +8,13 @@ var express = require('express'),
     myConnection = require('express-myconnection'),
     nodemailer = require('nodemailer');
 
-
     var app = express();
     var register = require('./routes/register');
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
-
-
     var editCRUD=require('./routes/edit');
-
     var sms = require('./routes/sms');
-
-
-
-
 
     function errorHandler(err, req, res, next) {
       res.status(500);
@@ -43,7 +35,7 @@ var express = require('express'),
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
-      password: 'password1!',
+      password: 'mxmaolqk',
       port: 3306,
       database: "librarifyDB"
     };
