@@ -16,6 +16,7 @@ var express = require('express'),
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
     var checker = require('./routes/checker');
+    var editCRUD=require('./routes/edit');
 
 
 
@@ -39,8 +40,8 @@ var express = require('express'),
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
-      // password: '5550121a',
-      password: 'coder123',
+      password: 'mxmaolqk',
+      // password: 'coder123',
       port: 3306,
       database: "librarifyDB"
     };
@@ -79,7 +80,7 @@ app.use(function(req,res,next){
     }
   }
   next();
-});;
+});
 // End of setup
 app.get('/', function(req, res) {
 // var data= {
@@ -108,9 +109,13 @@ app.post('/registration',register);
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
     admin: req.session.admintab,
-    user: req.session.username
+    user: req.session.username,
+
   });
 });
+
+app.post('/editDetails', editCRUD.update);
+
 app.get('/login', function(req, res) {
   res.render("login", {
     admin: req.session.admintab,

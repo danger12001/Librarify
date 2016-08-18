@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `locked` tinyint(1) NOT NULL,
   `registered` tinyint(1) NOT NULL,
   `one_time_pin` text,
+  `security_question` VARCHAR (200),
+  `security_answer` VARCHAR(200),
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 )
