@@ -15,12 +15,11 @@ var express = require('express'),
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
-<<<<<<< HEAD
-    var checker = require('./routes/checker');
+
     var editCRUD=require('./routes/edit');
-=======
+
     var sms = require('./routes/sms');
->>>>>>> bab0e5b19b36dae3456cad95a7301ab6c1daa090
+
 
 
 
