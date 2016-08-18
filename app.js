@@ -67,6 +67,16 @@ app.use(function(req, res, next) {
   }
   next();
 });
+app.use(function(req, res, next) {
+  var path = req.path.split("/")[1];
+  if (!req.session.admintab) {
+    if (path == "verify") {
+      return res.redirect("/");
+    }
+  }
+  next();
+});
+
 
 app.use(function(req,res,next){
   if (req.session.admintab){
@@ -143,11 +153,14 @@ login(req,res);
 
 app.get('/verify', function(req, res) {
   res.render("verify", {
+    admin: req.session.admintab,
+    user: req.session.username
   });
 });
 app.post('/verify', verify);
 app.get('/signup', function(req, res){
-  res.render('signup');
+  res.render('signup', {  admin: req.session.admintab,
+    user: req.session.username});
 });
 app.post('/signup', signup);
 
@@ -155,7 +168,7 @@ app.post('/signup', signup);
 app.get("/logout", function(req, res) {
   delete req.session.username;
   delete req.session.admintab;
-  res.redirect("/");
+  res.redirect("/login");
 });
 //starting server
 var server = app.listen(3000, function() {
