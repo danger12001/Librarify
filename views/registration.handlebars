@@ -33,7 +33,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2" for="ID-number">ID number:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="ID-number" name="ID_number" placeholder="Enter your ID-number no.">
+      <input type="text" class="form-control" id="ID-number" name="ID_number" placeholder="Enter your ID-number">
     </div>
   </div>
 
@@ -42,4 +42,17 @@
       <button type="submit" class="btn btn-default">Submit</button>
     </div>
   </div>
+  <form action = "/pictures/upload" method = "POST" enctype = "multipart/form-data">
+       <div class="file-field input-field">
+         <div class="btn">
+           <span>File</span>
+           <input type="file" name = "image">
+         </div>
+         <div class="file-path-wrapper">
+           <input class="file-path validate" type="text" required>
+         </div>
+         <input class = "btn" type = "submit" value = "Upload Image">
+       </form>
+       </div>
+</form>
 </form>

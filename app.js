@@ -13,6 +13,11 @@ var express = require('express'),
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
+    var Pic = require('./routes/pics'),
+
+PicDataService = require('./data-services/picDataService');
+
+
     var editCRUD=require('./routes/edit');
     var sms = require('./routes/sms');
 
@@ -41,6 +46,15 @@ var express = require('express'),
     };
 
     app.use(myConnection(mysql, dbOptions, 'single'));
+    // var serviceSetupCallback = function(connection){
+    //   return {
+    //     picDataService : new PicDataService(connection)
+    //   };
+    // };
+
+    // var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
+    // app.use(myConnectionProvider.setupProvider);
+    // app.use(myConnection(mysql, dbOptions, 'pool'));
     app.use(session({
   secret: 'space cats on synthesizers',
   resave: false,
@@ -90,6 +104,7 @@ app.use(function(req,res,next){
 
   next();
 });
+var pic = new Pic();
 // End of setup
 
 app.get('/', function(req, res) {
@@ -133,6 +148,7 @@ app.get('/registration', function(req, res) {
 });
 app.post('/registration',register);
 
+
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
     admin: req.session.admintab,
@@ -158,7 +174,7 @@ login(req,res);
 app.get('/verify', function(req, res) {
   res.render("verify", {
     admin: req.session.admintab,
-    user: req.session.username
+    user: req.session.username,
   });
 });
 app.post('/verify', verify);

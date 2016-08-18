@@ -20,6 +20,7 @@
     "bluebird": "~3.4.1",
     "express-flash": "0.0.2",
     "nodemon": "~1.10.0",
-    "twilio": "~2.9.2"
+    "twilio": "~2.9.2",
+    "multer": "~1.2.0"
   }
 }
