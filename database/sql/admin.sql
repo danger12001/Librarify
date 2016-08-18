@@ -1,1 +1,2 @@
-INSERT INTO `users` set ?;
+
+INSERT INTO `users` set ? ;
