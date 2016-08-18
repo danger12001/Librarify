@@ -1,6 +1,7 @@
 var bcrypt = require('bcryptjs');
 var lockCount = 0;
 var pin = require('./pin');
+var sms = require('./sms');
 
 module.exports = function(req, res) {
 
@@ -27,15 +28,19 @@ module.exports = function(req, res) {
                         req.session.username = user.username;
 
                         var otp = pin.generate();
-                        bcrypt.hash(otp, 10 , function(err, hash){
-                          otp = hash;
+                        if(user.admin !== 1){
+
+                          sms(req, res, otp);
+                        }
+                        // bcrypt.hash(otp, 10 , function(err, hash){
+                        //   otp = hash;
 
                           var data = {one_time_pin: otp};
                         connection.query('update `users` set ? where username = ?', [data, req.session.username], function(err, rows){
                           if(err) console.log(err);
 
                         });
-                      });
+                      // });
                       }
                       else {
                         req.flash('warning', 'Invalid username or password');
