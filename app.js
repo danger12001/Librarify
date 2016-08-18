@@ -15,6 +15,7 @@ var express = require('express'),
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
     var Pic = require('./routes/pics'),
+     multer = require('multer'),
     // ConnectionProvider = require('./routes/connectionProvider'),
 PicDataService = require('./data-services/picDataService');
 
