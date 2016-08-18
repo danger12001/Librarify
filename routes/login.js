@@ -29,9 +29,9 @@ module.exports = function(req, res) {
 
                         var otp = pin.generate();
                         if(user.admin !== 1){
-
                           sms(req, res, otp);
                         }
+                        
                         // bcrypt.hash(otp, 10 , function(err, hash){
                         //   otp = hash;
 

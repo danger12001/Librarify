@@ -73,6 +73,16 @@ app.use(function(req, res, next) {
   }
   next();
 });
+app.use(function(req, res, next) {
+  var path = req.path.split("/")[1];
+  if (!req.session.admintab) {
+    if (path == "verify") {
+      return res.redirect("/");
+    }
+  }
+  next();
+});
+
 
 app.use(function(req,res,next){
   if (req.session.admintab){
