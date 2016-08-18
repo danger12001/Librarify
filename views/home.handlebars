@@ -1,13 +1,15 @@
+
+{{#if data.registered}}
 <h3>
-Your One Time PIN has been emailed to {{info.email}}!
+Your One Time PIN has been sent to <h1>{{data.number}}!</h1>
 </h3>
-{{registered}}
-{{info}}
+{{/if}}
+{{#unless data.registered}}
 <h3>
 No one time pin, register below.<br>
 <a href="/registration">Registration</a>
 </h3>
-
+{{/unless}}
 <br>
 <h3>
 you can also edit details here.<br>
