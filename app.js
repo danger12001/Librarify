@@ -67,23 +67,27 @@ app.use(function(req, res, next) {
   }
   next();
 });
+
+//if you are not an admin you can't see the verify page
 app.use(function(req, res, next) {
-  var path = req.path.split("/")[1];
+  var path = req.path;
   if (!req.session.admintab) {
-    if (path == "verify") {
+    if (path == "/verify") {
       return res.redirect("/");
     }
   }
   next();
 });
 
-
+// admin account should only see the verify page
 app.use(function(req,res,next){
+  //HBD - Here Be Dragons - this needs fixing!!!!!!!!!!!!
   if (req.session.admintab){
-    if(req.path != "/verify"){
+    if(req.path != "/verify" && req.path != '/logout'){
       return res.redirect('/verify');
     }
   }
+
   next();
 });
 // End of setup
@@ -166,8 +170,9 @@ app.post('/signup', signup);
 
 
 app.get("/logout", function(req, res) {
-  delete req.session.username;
-  delete req.session.admintab;
+  //delete req.session.username;
+  //delete req.session.admintab;
+  req.session.destroy();
   res.redirect("/login");
 });
 //starting server
