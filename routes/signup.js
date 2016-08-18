@@ -8,27 +8,14 @@ module.exports = function(req, res, next) {
 
         var password = req.body.password;
         var passwordVerification = req.body.passwordV;
-        var admin = "";
-        var locked = "";
-        if(req.body.admin === "on"){
-          admin = "1";
-        }
-        else {
-          admin = "0";
-        }
-        if(req.body.locked === "on"){
-          locked = "1";
-        }
-        else {
-          locked = "0";
-        }
+        var admin = 0;
+        var locked = 0;
+
 
         var data = {
             username: req.body.username,
             admin: admin,
             locked: locked,
-            email: req.body.email
-
         };
 
         if(data.username.length < 4 || password.length < 4){
@@ -45,6 +32,7 @@ module.exports = function(req, res, next) {
 
                     connection.query('insert into users set ?', data, function(err, data) {
                          if (err) {
+                            console.log(err);
                              res.redirect('/signup');
                          } else {
                              res.redirect('/login');
