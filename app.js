@@ -15,8 +15,13 @@ var express = require('express'),
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
     var Pic = require('./routes/pics'),
+<<<<<<< HEAD
 	multer = require('multer'),
     ConnectionProvider = require('./routes/connectionProvider'),
+=======
+     multer = require('multer'),
+    // ConnectionProvider = require('./routes/connectionProvider'),
+>>>>>>> ce3ba95cadf7c3e22cc3c3029dddf15bcbe463ca
 PicDataService = require('./data-services/picDataService');
 
 
@@ -51,16 +56,16 @@ PicDataService = require('./data-services/picDataService');
       database: "librarifyDB"
     };
 
-    // app.use(myConnection(mysql, dbOptions, 'single'));
-    var serviceSetupCallback = function(connection){
-      return {
-        picDataService : new PicDataService(connection)
-      };
-    };
+    app.use(myConnection(mysql, dbOptions, 'single'));
+    // var serviceSetupCallback = function(connection){
+    //   return {
+    //     picDataService : new PicDataService(connection)
+    //   };
+    // };
 
-    var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
-    app.use(myConnectionProvider.setupProvider);
-    app.use(myConnection(mysql, dbOptions, 'pool'));
+    // var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
+    // app.use(myConnectionProvider.setupProvider);
+    // app.use(myConnection(mysql, dbOptions, 'pool'));
     app.use(session({
   secret: 'space cats on synthesizers',
   resave: false,
