@@ -25,13 +25,17 @@ module.exports = function(req, res) {
                       // console.log(user.username);
                       if(user.username.match(username)){
                         req.session.username = user.username;
-                        var pin = pin.generate();
 
-                        bcrypt.hash(pin, 10 , function(err, hash){
-                          pin = hash;
+                        var otp = pin.generate();
+                        bcrypt.hash(otp, 10 , function(err, hash){
+                          otp = hash;
+
+                          var data = {one_time_pin: otp};
+                        connection.query('update `users` set ? where username = ?', [data, req.session.username], function(err, rows){
+                          if(err) console.log(err);
+
                         });
-                        connection.query('INSERT into users (one-time-pin) values = ?', pin, function(err, rows){
-                        });
+                      });
                       }
                       else {
                         req.flash('warning', 'Invalid username or password');

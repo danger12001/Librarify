@@ -13,16 +13,13 @@ var adminInsert = String(fs.readFileSync('./database/sql/admin.sql'));
   var dbOptions = {
     host: '127.0.0.1',
     user: 'root',
-
     password: '5550121a',
-
     port: 3306,
     database: "librarifyDB"
   };
 var connection = mysql.createConnection(dbOptions);
 
 
-exports.setup = function(){
 
 //DB SETUP SQL
 connection.query(createDB, [], function(err, result) {
@@ -42,4 +39,3 @@ connection.query(createDB, [], function(err, result) {
 });
 });
 });
-};
