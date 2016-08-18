@@ -3,49 +3,60 @@
   <div class="form-group">
     <label class="control-label col-sm-2" for="name">Name:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+      <input type="text" value="{{data.name}}" class="form-control" id="name" name="name" placeholder="Enter your name">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="surname">Surname:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter your surname">
+      <input type="text" value="{{data.surname}}" class="form-control" id="surname" name="surname" placeholder="Enter your surname">
     </div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="username">Username:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
-    </div>
-  </div>
+
   <div class="form-group">
     <label class="control-label col-sm-2" for="address">Address:</label>
     <div class="col-sm-10">
-      <input type="text/number" class="form-control" id="address" name="address" placeholder="Enter your address">
+      <input type="text/number" value="{{data.address}}" class="form-control" id="address" name="address" placeholder="Enter your address">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="number">Cell number:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="cell-number" name="cell-number" placeholder="Enter your number">
+      <input type="text" value="{{data.cell_number}}" class="form-control" id="cell-number" name="cell_number" placeholder="Enter your cellphone number">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="email">Email:</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" name="name" placeholder="Enter email">
+      <input type="email" value="{{data.email}}" class="form-control" id="email" name="name" placeholder="Enter email">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="ID-number">ID number:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="ID-number" placeholder="Enter your ID-number no.">
+      <input type="text" value="{{data.ID_number}}" class="form-control" id="ID-number" name="ID_number" placeholder="Enter your ID-number">
     </div>
   </div>
 
+<p id="demo"></p>
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
+      <a type="submit" onclick="myFunction()" class="btn btn-default" href="/">Submit</a>
     </div>
   </div>
 </form>
+
+<script href="/js/securityAnswerComparisonFunc.js">
+
+// function myFunction() {
+//
+//
+//     var person = prompt("Please anwser the security question:","Harry Potter" );
+//
+//     if (person !== null) {
+//         document.getElementById("demo").innerHTML =
+//         "Hello " + person + "! How are you today?";
+//     }
+// }
+</script>

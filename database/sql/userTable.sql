@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `admin` tinyint(1) NOT NULL,
   `locked` tinyint(1) NOT NULL,
   `registered` tinyint(1) NOT NULL,
-  `one-time-pin` INT(4) NOT NULL,
+  `one_time_pin` text,
+  `security_question` VARCHAR (200),
+  `security_answer` VARCHAR(200),
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 )

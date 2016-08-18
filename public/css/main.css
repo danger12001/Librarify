@@ -1,0 +1,29 @@
+#container {
+  margin: 12%;
+}
+
+button {
+    background-image: none;
+    padding: 12px;
+}
+
+li {
+  color: #D2FFF0;
+}
+
+.body {
+  background-color: #D2FFF0;
+}
+
+h4 {
+  color: #00FF00;
+}
+
+h1 {
+  text-align: center;
+}
+
+#nav {
+  color: #00FF00;
+  margin: 0.7%
+}

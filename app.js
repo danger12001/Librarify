@@ -5,10 +5,20 @@ var express = require('express'),
     bcrypt = require('bcryptjs'),
     bodyParser = require('body-parser'),
     flash = require('express-flash'),
+    myConnection = require('express-myconnection'),
     nodemailer = require('nodemailer');
 
+
     var app = express();
-    var setup = require('./database/setup');
+    var register = require('./routes/register');
+    var login = require('./routes/login');
+    var signup = require('./routes/signup');
+    var verify = require('./routes/verify');
+    var editCRUD=require('./routes/edit');
+    var sms = require('./routes/sms');
+
+
+
 
     function errorHandler(err, req, res, next) {
       res.status(500);
@@ -25,6 +35,18 @@ var express = require('express'),
     app.use(bodyParser.json());
     app.use(express.static("public"));
 
+
+    var dbOptions = {
+      host: '127.0.0.1',
+      user: 'root',
+
+      password: 'password1!',
+
+      port: 3306,
+      database: "librarifyDB"
+    };
+
+    app.use(myConnection(mysql, dbOptions, 'single'));
     app.use(session({
   secret: 'space cats on synthesizers',
   resave: false,
@@ -38,14 +60,62 @@ app.engine('handlebars', handlebars({
 }));
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
+var connection = mysql.createConnection(dbOptions);
 
-setup.setup();
+// setup.setup();
+
+// Middleware
+app.use(function(req, res, next) {
+  if (req.path != "/login" && req.path != "/signup") {
+      if (!req.session.username) {
+        return res.redirect("/login");
+    }
+  }
+  next();
+});
+
+app.use(function(req,res,next){
+  if (req.session.admintab){
+    if(req.path != "/verify"){
+      return res.redirect('/verify');
+    }
+  }
+  next();
+});
 // End of setup
+
 app.get('/', function(req, res) {
+
+var user = req.session.username;
+
+connection.query('select * from `users` where username = ?', user, function(err, registered){
+if (err) console.log(err);
+connection.query('select * from info where username = ?', user, function(err, email){
+if (err) console.log(err);
+
+// console.log(registered[0].registered);
+
+  if(registered[0].registered == 1){
+    var data = {registered: true,
+              number: email[0].cell_number};
+
+            // mailer(req, res);
+
   res.render("home", {
     admin: req.session.admintab,
-    user: req.session.username
+    user: req.session.username,
+    data: data
   });
+}
+else {
+  res.render("home", {
+    admin: req.session.admintab,
+    user: req.session.username,
+
+  });
+}
+});
+});
 });
 app.get('/registration', function(req, res) {
   res.render("registration", {
@@ -53,25 +123,46 @@ app.get('/registration', function(req, res) {
     user: req.session.username
   });
 });
+app.post('/registration',register);
+
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
+    admin: req.session.admintab,
+    user: req.session.username,
+
+  });
+});
+
+app.post('/editDetails', editCRUD.update);
+
+app.get('/login', function(req, res) {
+  res.render("login", {
     admin: req.session.admintab,
     user: req.session.username
   });
 });
-app.get('/login', function(req, res) {
-  res.render("login", {
-  });
+
+app.post('/login',function(req, res){
+login(req,res);
 });
-app.get('/signup', function(req, res) {
-  res.render("signup", {
-  });
-});
+
+
 app.get('/verify', function(req, res) {
   res.render("verify", {
   });
 });
+app.post('/verify', verify);
+app.get('/signup', function(req, res){
+  res.render('signup');
+});
+app.post('/signup', signup);
 
+
+app.get("/logout", function(req, res) {
+  delete req.session.username;
+  delete req.session.admintab;
+  res.redirect("/");
+});
 //starting server
 var server = app.listen(3000, function() {
 

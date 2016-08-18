@@ -1,9 +1,17 @@
+
+{{#if data.registered}}
+<h3>
+Your One Time PIN has been sent to <h1>{{data.number}}!</h1>
+</h3>
+{{/if}}
+{{#unless data.registered}}
 <h3>
 No one time pin, register below.<br>
 <a href="/registration">Registration</a>
 </h3>
+{{/unless}}
 <br>
 <h3>
-Or edit details.<br>
+you can also edit details here.<br>
 <a href="/editDetails">Edit details</a>
 </h3>
