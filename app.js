@@ -40,7 +40,7 @@ var express = require('express'),
       host: '127.0.0.1',
       user: 'root',
       // password: '5550121a',
-      password: 'coder123',
+      password: '12345',
       port: 3306,
       database: "librarifyDB"
     };
@@ -118,10 +118,7 @@ app.get('/login', function(req, res) {
   });
 });
 app.post('/login', login);
-app.get('/signup', function(req, res) {
-  res.render("signup", {
-  });
-});
+
 app.get('/verify', function(req, res) {
   res.render("verify", {
   });
