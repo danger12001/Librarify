@@ -15,7 +15,12 @@ var express = require('express'),
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
+<<<<<<< HEAD
     var checker = require('./routes/checker');
+    var editCRUD=require('./routes/edit');
+=======
+    var sms = require('./routes/sms');
+>>>>>>> bab0e5b19b36dae3456cad95a7301ab6c1daa090
 
 
 
@@ -39,8 +44,9 @@ var express = require('express'),
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
-      // password: '5550121a',
+
       password: '12345',
+
       port: 3306,
       database: "librarifyDB"
     };
@@ -59,6 +65,15 @@ app.engine('handlebars', handlebars({
 }));
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
+var dbOptions = {
+  host: '127.0.0.1',
+  user: 'root',
+  password: '5550121a',
+  // password: 'coder123',
+  port: 3306,
+  database: "librarifyDB"
+};
+var connection = mysql.createConnection(dbOptions);
 
 // setup.setup();
 
@@ -79,23 +94,83 @@ app.use(function(req,res,next){
     }
   }
   next();
-});;
+});
 // End of setup
+
+
+
+
+
+
+// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
+// app.post("/login", function (request, response) {
+//   var user = request.session.username;
+//
+//   connection.query('select * from `users` where username = ?', user, function(err, result){
+//   if (err) console.log(err);
+//   var pin = result.one_time_pin;
+//   var body = "Your One Time PIN is: " + pin ;
+//   var cellnumber = '+27846691133';
+//   // var cellnumber = '+2748079473';
+//   // var message = "Your One Time PIN has been sent to: " + '+2748079473' ;
+//
+//   console.log('send sms to', cellnumber + ', text', body);
+//
+//   twilioClient.messages.create({
+//     to: cellnumber,
+//     from: '+12107142670',
+//     body: body,
+//   }, function (err, message) {
+//     if (err) {
+//       console.log(err);
+//       response.status(500).send('Unable to send sms: ' + err);
+//     }
+//     console.log(message.sid);
+//     response.sendStatus(200);
+//   });
+//
+// });
+// });
+
+
+
+
+
+
+
+
 app.get('/', function(req, res) {
-// var data= {
-//   registered: true,
-//   email: ""
-// }
 
+var user = req.session.username;
 
-console.log(checker.email);
+connection.query('select * from `users` where username = ?', user, function(err, registered){
+if (err) console.log(err);
+connection.query('select * from info where username = ?', user, function(err, email){
+if (err) console.log(err);
 
+// console.log(registered[0].registered);
 
+  if(registered[0].registered == 1){
+    var data = {registered: true,
+              number: email[0].cell_number};
+
+            // mailer(req, res);
+
+  res.render("home", {
+    admin: req.session.admintab,
+    user: req.session.username,
+    data: data
+  });
+}
+else {
   res.render("home", {
     admin: req.session.admintab,
     user: req.session.username,
 
   });
+}
+});
+});
 });
 app.get('/registration', function(req, res) {
   res.render("registration", {
@@ -108,17 +183,34 @@ app.post('/registration',register);
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
     admin: req.session.admintab,
-    user: req.session.username
+    user: req.session.username,
+
   });
 });
+
+app.post('/editDetails', editCRUD.update);
+
 app.get('/login', function(req, res) {
   res.render("login", {
     admin: req.session.admintab,
     user: req.session.username
   });
 });
+<<<<<<< HEAD
 app.post('/login', login);
 
+=======
+app.post('/login',function(req, res){
+login(req,res);
+// sms(req,res);
+});
+
+// login);
+app.get('/signup', function(req, res) {
+  res.render("signup", {
+  });
+});
+>>>>>>> 68692f106e2c8fb33c518fd3fdd5e6881f658104
 app.get('/verify', function(req, res) {
   res.render("verify", {
   });
@@ -128,6 +220,13 @@ app.get('/signup', function(req, res){
   res.render('signup');
 });
 app.post('/signup', signup);
+
+
+app.get("/logout", function(req, res) {
+  delete req.session.username;
+  delete req.session.admintab;
+  res.redirect("/");
+});
 //starting server
 var server = app.listen(3000, function() {
 

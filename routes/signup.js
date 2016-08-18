@@ -8,6 +8,8 @@ module.exports = function(req, res, next) {
 
         var password = req.body.password;
         var passwordVerification = req.body.passwordV;
+        var security_question= req.body.security_question;
+        var security_answer = req.body.security_answer;
         var admin = 0;
         var locked = 0;
 
@@ -30,6 +32,12 @@ module.exports = function(req, res, next) {
                     req.flash('warning', "Passwords do not match");
                   }
 
+                  bcrypt.hash(security_question, 10, function(err,hash){
+                    data.security_question= hash;
+
+                  bcrypt.hash(security_answer, 10, function(err,hash){
+                    data.security_answer= hash;
+
 
                     connection.query('insert into users set ?', data, function(err, data) {
                          if (err) {
@@ -38,6 +46,8 @@ module.exports = function(req, res, next) {
                          } else {
                              res.redirect('/login');
                          }
+                       });
+                       });
             });
       });
     });
