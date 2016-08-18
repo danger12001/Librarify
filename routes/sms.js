@@ -17,7 +17,7 @@ module.exports = function(request, response, otp){
   // console.log(result);
   // console.log(user);
   var body = "Your One Time PIN is: " + otp ;
-  var cellnumber = '+27846691133';
+  var cellnumber = '+27748079473';
   // var cellnumber = '+2748079473';
   // var message = "Your One Time PIN has been sent to: " + '+2748079473' ;
 

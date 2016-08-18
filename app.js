@@ -14,8 +14,12 @@ var express = require('express'),
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
+
+
     var editCRUD=require('./routes/edit');
+
     var sms = require('./routes/sms');
+
 
 
 
@@ -39,9 +43,7 @@ var express = require('express'),
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
-
       password: 'password1!',
-
       port: 3306,
       database: "librarifyDB"
     };

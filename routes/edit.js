@@ -15,7 +15,7 @@ exports.update=function(req, res){
 		if (err) return next(err);
 		connection.query('UPDATE info SET ? WHERE username = ?', [data, username], function(err, rows){
 			if (err) return next(err);
-      		// res.redirect('/editDetails');
+      		res.redirect('/');
 		});
     });
 
