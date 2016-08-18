@@ -5,10 +5,9 @@ var user =  req.session.username;
   var dbOptions = {
     host: '127.0.0.1',
     user: 'root',
-
-    password: '5550121a',
-
-    // password: 'coder123',
+    // password: 'password1!',
+    password: 'mxmaolqk',
+    
     port: 3306,
     database: "librarifyDB"
   };

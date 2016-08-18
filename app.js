@@ -10,11 +10,11 @@ var express = require('express'),
 
 
     var app = express();
-    // var DataGrabber = require('./routes/register');
     var register = require('./routes/register');
     var login = require('./routes/login');
     var signup = require('./routes/signup');
     var verify = require('./routes/verify');
+
 
     var editCRUD=require('./routes/edit');
 
@@ -43,10 +43,10 @@ var express = require('express'),
     var dbOptions = {
       host: '127.0.0.1',
       user: 'root',
+      password: 'mxmaolqk',
 
-      password: '5550121a',
+      // password: 'password1!',
 
-      // password: 'mxmaolqk',
       port: 3306,
       database: "librarifyDB"
     };
@@ -65,14 +65,6 @@ app.engine('handlebars', handlebars({
 }));
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
-var dbOptions = {
-  host: '127.0.0.1',
-  user: 'root',
-  password: '5550121a',
-  // password: 'coder123',
-  port: 3306,
-  database: "librarifyDB"
-};
 var connection = mysql.createConnection(dbOptions);
 
 // setup.setup();
@@ -96,48 +88,6 @@ app.use(function(req,res,next){
   next();
 });
 // End of setup
-
-
-
-
-
-
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-// app.post("/login", function (request, response) {
-//   var user = request.session.username;
-//
-//   connection.query('select * from `users` where username = ?', user, function(err, result){
-//   if (err) console.log(err);
-//   var pin = result.one_time_pin;
-//   var body = "Your One Time PIN is: " + pin ;
-//   var cellnumber = '+27846691133';
-//   // var cellnumber = '+2748079473';
-//   // var message = "Your One Time PIN has been sent to: " + '+2748079473' ;
-//
-//   console.log('send sms to', cellnumber + ', text', body);
-//
-//   twilioClient.messages.create({
-//     to: cellnumber,
-//     from: '+12107142670',
-//     body: body,
-//   }, function (err, message) {
-//     if (err) {
-//       console.log(err);
-//       response.status(500).send('Unable to send sms: ' + err);
-//     }
-//     console.log(message.sid);
-//     response.sendStatus(200);
-//   });
-//
-// });
-// });
-
-
-
-
-
-
-
 
 app.get('/', function(req, res) {
 
@@ -196,16 +146,12 @@ app.get('/login', function(req, res) {
     user: req.session.username
   });
 });
+
 app.post('/login',function(req, res){
 login(req,res);
-// sms(req,res);
 });
 
-// login);
-app.get('/signup', function(req, res) {
-  res.render("signup", {
-  });
-});
+
 app.get('/verify', function(req, res) {
   res.render("verify", {
   });
