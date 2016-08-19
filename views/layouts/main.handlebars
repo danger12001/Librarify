@@ -9,54 +9,44 @@
 
 
 <body class="body">
-  <header>
-    <nav class="navbar navbar-inverse navbar-full navbar-fixed-top" id="nav">___Librarify___
-      <button class="navbar-toggler hidden-xs-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
-        &#9776;
-</button>
+  {{#if admin}}
+  <ul class="topnav" id="myTopnav">
+    <li><a href="/logout">Logout</a></li>
+    <li class="icon">
+      <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+    </li>
+  </ul>
+  {{/if}}
 
-      <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-        <ul class="nav navbar-nav">
-          {{#if user}}
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/registration">Registration</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/editDetails">Edit details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout" style="float:right">Logout</a>
-          </li>
+{{#if user}}
+{{#unless admin}}
+  <ul class="topnav" id="myTopnav">
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="/registration">Registration</a></li>
+    <li><a href="/editDetails">Edit Details</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li class="icon">
+      <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+    </li>
+  </ul>
+{{/unless}}
 {{/if}}
-        {{#if admin}}
-        {
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout" style="float:right">Logout</a>
-          </li>
 
-          {{/if}}
-        </ul>
-      </div>
+{{#unless admin}}
+{{#unless user}}
+<ul class="topnav" id="myTopnav">
+  <li><a href="/signup">Sign Up</a></li>
+  <li><a href="/login">Login</a></li>
 
-    </nav>
-  </header>
-    <div class="container-fluid" id="container">
-
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
-
-            <div role="main" >
-                {{{body}}}
-
-            </div>
-        </div>
-    </div>
+  <li class="icon">
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+  </li>
+</ul>
+{{/unless}}
+{{/unless}}
+<div class='container'>
+{{{body}}}
+</div>
 
 
     <footer id="footer">

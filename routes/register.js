@@ -6,6 +6,7 @@ var user =  req.session.username;
     host: '127.0.0.1',
     user: 'root',
     password: 'password1!',
+    // password: '5550121a',
     port: 3306,
     database: "librarifyDB"
   };
@@ -26,7 +27,7 @@ var data = {
     connection.query("update `users` set registered = 1 where username = ?", user, function(err, rows){
       if(err) console.log(err);
     });
-    res.redirect('/');
+    res.redirect('/picture');
     });
 
 

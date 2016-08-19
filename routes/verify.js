@@ -7,8 +7,8 @@ var user = req.session.username;
   // bcrypt.hash(verification, 10, function(err, hash) {
   connection.query('select * from users where one_time_pin = ?', verification, function(err, results){
     if(results.length !== 1){
-      req.flash('warning', "NOT VERIFIED");
-      res.redirect('/verify');
+      res.render('details', { name: "NOT VERIFIED",
+      user: req.session.username, admin: req.session.admintab});
     }
     else {
 
@@ -22,8 +22,10 @@ var user = req.session.username;
         };
         connection.query('update users set ? where one_time_pin = ?', [data, verification], function(err, result){
           if(err) console.log(err);
-          req.flash('warning', "Verified : Thank you " + results[0].username);
-          res.redirect('/verify');
+          // req.flash('warning', "Verified : Thank you " + results[0].username);
+          res.render('details', {img: results[0].img, name: results[0].username,
+          user: req.session.username, admin: req.session.admintab});
+          // res.redirect('/verify');
 
       });
       }

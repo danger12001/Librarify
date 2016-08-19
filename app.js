@@ -6,6 +6,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     flash = require('express-flash'),
     myConnection = require('express-myconnection'),
+    multer = require('multer'),
+    ConnectionProvider = require('./routes/connectionProvider');
     nodemailer = require('nodemailer');
 
     var app = express();
@@ -41,20 +43,21 @@ PicDataService = require('./data-services/picDataService');
       host: '127.0.0.1',
       user: 'root',
       password: 'password1!',
+      // password: '5550121a',
       port: 3306,
       database: "librarifyDB"
     };
+    // app.use(myConnection(mysql, dbOptions, 'single'));
+    var connection = mysql.createConnection(dbOptions);
+    var serviceSetupCallback = function(connection){
+      return {
+        picDataService : new PicDataService(connection)
+      };
+    };
 
-    app.use(myConnection(mysql, dbOptions, 'single'));
-    // var serviceSetupCallback = function(connection){
-    //   return {
-    //     picDataService : new PicDataService(connection)
-    //   };
-    // };
-
-    // var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
-    // app.use(myConnectionProvider.setupProvider);
-    // app.use(myConnection(mysql, dbOptions, 'pool'));
+    var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
+    app.use(myConnectionProvider.setupProvider);
+    app.use(myConnection(mysql, dbOptions, 'pool'));
     app.use(session({
   secret: 'space cats on synthesizers',
   resave: false,
@@ -68,7 +71,6 @@ app.engine('handlebars', handlebars({
 }));
 app.set('view engine', 'handlebars');
 app.use(errorHandler);
-var connection = mysql.createConnection(dbOptions);
 
 // setup.setup();
 
@@ -148,6 +150,16 @@ app.get('/registration', function(req, res) {
 });
 app.post('/registration',register);
 
+app.get('/picture', function(req, res){
+  res.render('imageUpload', {
+    admin: req.session.admintab,
+    user: req.session.username
+  });
+});
+
+app.post('/picture', multer({ dest: './public/uploads/'}).single('image'), pic.postPic);
+
+
 
 app.get('/editDetails', function(req, res) {
   res.render("editDetails", {
@@ -177,6 +189,10 @@ app.get('/verify', function(req, res) {
     user: req.session.username,
   });
 });
+// app.get('/details', function(req, res){
+//   res.render('verify', {admin: req.session.admintab,
+//   user: req.session.username});
+// });
 app.post('/verify', verify);
 app.get('/signup', function(req, res){
   res.render('signup', {  admin: req.session.admintab,
